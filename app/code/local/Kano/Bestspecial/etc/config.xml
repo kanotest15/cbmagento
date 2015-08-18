@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Kano_Bestspecial>
+      <version>0.1.0</version>
+    </Kano_Bestspecial>
+  </modules>
+  <global>
+    <helpers>
+      <bestspecial>
+        <class>Kano_Bestspecial_Helper</class>
+      </bestspecial>
+    </helpers>
+	<blocks>
+	  <bestspecial>
+		<class>Kano_Bestspecial_Block</class>
+	  </bestspecial>
+			<catalog>
+				<rewrite>
+					<product_sale>Kano_Bestspecial_Block_Catalog_Product_Sale</product_sale>
+				</rewrite>
+			</catalog>
+	</blocks>
+  </global>
+</config> 

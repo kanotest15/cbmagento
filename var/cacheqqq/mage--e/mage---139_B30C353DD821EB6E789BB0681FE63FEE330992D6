@@ -1,0 +1,32 @@
+<footer class="footer-container">
+	<div class="footer">	
+		 <div class="footer_cms">
+	    
+	 </div>
+		
+    </div>
+	<div class="outer_footer">
+		<div class="footer_top" id="footer">		
+			<div id="block_1" class="footer-area">
+				 
+			</div>
+			</div> 
+		
+	</div>
+	<div class="footer_bottom"> 
+	        <div class="footer_bottom_link">
+			<ul class="links">
+                        <li class="first toplinks1" ><a href="http://localhost/cb_magento/catalog/seo_sitemap/category/?___SID=U" title="Site Map" >Site Map</a></li>
+        		                        <li class=" toplinks2" ><a href="http://localhost/cb_magento/catalogsearch/term/popular/?___SID=U" title="Search Terms" >Search Terms</a></li>
+        		                        <li class=" toplinks3" ><a href="http://localhost/cb_magento/catalogsearch/advanced/?___SID=U" title="Advanced Search" >Advanced Search</a></li>
+        		                        <li  class="toplinks2" ><a href="http://localhost/cb_magento/sales/guest/form/?___SID=U" title="Orders and Returns" >Orders and Returns</a></li>
+        		                        <li class=" toplinks5" ><a href="http://localhost/cb_magento/contacts/?___SID=U" title="Contact Us" >Contact Us</a></li>
+        		                        <li class=" last toplinks6" ><a href="http://localhost/cb_magento/rss/?___SID=U" title="RSS" class="link-rss">RSS</a></li>
+        		    </ul>
+			        		<address>&copy; 2014 Madison Island. All Rights Reserved.</address> 
+				 
+	        </div>
+	</div>
+</footer>
+ 
+ 

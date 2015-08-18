@@ -1,0 +1,71 @@
+<?php
+class Kano_Tender_IndexController extends Mage_Core_Controller_Front_Action{
+    
+    
+    public function IndexAction() {
+        
+               
+      
+	  $this->loadLayout();   
+	  $this->getLayout()->getBlock("head")->setTitle($this->__("Tender"));
+	        $breadcrumbs = $this->getLayout()->getBlock("breadcrumbs");
+      $breadcrumbs->addCrumb("home", array(
+                "label" => $this->__("Home Page"),
+                "title" => $this->__("Home Page"),
+                "link"  => Mage::getBaseUrl()
+		   ));
+
+      $breadcrumbs->addCrumb("tender", array(
+                "label" => $this->__("Tender"),
+                "title" => $this->__("Tender")
+		   ));
+
+      $this->renderLayout(); 
+	  
+    }
+    
+    
+    public function viewAction() {
+      
+  
+        $this->loadLayout();  
+         $this->getLayout()->getBlock("head")->setTitle($this->__("View Tenders"));
+	$this->renderLayout(); 
+	  
+    }
+    
+     
+    public function detailAction() {
+        
+        
+        
+     
+      
+        $this->loadLayout();  
+          $this->getLayout()->getBlock("head")->setTitle($this->__("View Tenders details"));
+	$this->renderLayout(); 
+	  
+    }
+    
+      public function homesliderAction() {
+        
+        
+        
+   
+      
+        $this->loadLayout();  
+         
+	$this->renderLayout(); 
+	  
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+     
+   
+}

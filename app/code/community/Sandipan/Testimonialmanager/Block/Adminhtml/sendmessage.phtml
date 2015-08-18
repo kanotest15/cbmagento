@@ -1,0 +1,179 @@
+<!--<link rel="stylesheet" type="text/css" href="http://magento.webkul.com/Marketplace/skin/frontend/default/default/marketplace/css/wk_block.css" media="all"/>-->
+<?php $userid = $this->getRequest()->getParam('id'); ?>
+<?php
+$helper = Mage::helper('marketplace');
+
+//if ($userid) {
+$captchenable = $percent = Mage::getStoreConfig('marketplace/marketplace_options/captcha');
+
+$rowsocial = Mage::getModel('marketplace/userprofile')->getPartnerProfileById($userid);
+?>
+<!--    <style type="text/css">
+
+        #ask_data {
+            background-clip: padding-box;
+            background-color: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            /*display: none;*/
+            left: 50%;
+            margin: -250px 0 0 -280px;
+            outline: medium none;
+            position: fixed;
+            top: 50%;
+            width: 530px;
+            z-index: 1050;
+        }
+        .modal_header {
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #eeeeee;
+            border-radius: 4px 4px 0 0;
+            padding: 9px 15px;
+        }
+        #ask_form {
+            /*display: inline-block;*/
+            margin-top: 20px;
+        }
+        .modal_header h3 {
+            display: inline-block;
+            font-size: 20px;
+            opacity: 0.6;
+        }
+        .wk_close {
+            color: #000000;
+            cursor: pointer;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 20px;
+            opacity: 0.2;
+            text-shadow: 0 1px 0 #ffffff;
+        }
+        .wk_clear {
+            clear: both;
+        }
+        #ask_data .label {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+            padding-left: 20px;
+            text-align: left;
+            width: 80px;
+        }
+        #ask_data input {
+            width: 315px;
+        }
+        #ask_form input, .group-select select, #ask_form textarea {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+            color: #555555;
+            display: inline-block;
+            font-size: 14px;
+            height: 20px;
+            line-height: 20px;
+            margin-bottom: 10px;
+            padding: 4px 6px;
+            transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+            vertical-align: top;
+        }
+        #ask_form textarea {
+            height: 75px;
+            width: 315px;
+        }
+        .modal_footer:before, .modal_footer:after {
+            content: "";
+            display: table;
+            line-height: 0;
+        }
+        #ask_data .error {
+            bottom: 15px;
+            display: none;
+            left: 210px;
+            position: absolute;
+        }
+        #ask_data .errormail {
+            bottom: 15px;
+            color: #df280a;
+            display: none;
+            font-weight: bold;
+            left: 115px;
+            position: absolute;
+        }
+
+
+    </style>-->
+<a href="#content-div" class="fancybox">Send message</a>
+<div style="display: none">
+    <div id="content-div">
+        <div id="ask_data">
+            <div class="modal_header">
+                <h3><?php echo $helper->__('Send Message to me') ?>..</h3>
+                <span  class="wk_close" >x</span>
+                <span  class="wk_clear" ></span>
+            </div>
+            <form id="ask_form" method="post" >
+                <span class="label"><?php echo $helper->__('Email') ?> :</span><input type="text" name="email" class="queryemail"/>
+                <span class="label"><?php echo $helper->__('Subject') ?> :</span><input type="text" name="subject" class="querysubject"/>
+                <span class="label"> <?php echo $helper->__('Ask') ?> :</span><textarea  name="ask" class="queryquestion"></textarea>
+                <input type="hidden" name="seller-id" value="<?php echo $userid; ?>"/>
+                <?php if ($captchenable) { ?>
+                    <span class="label">
+                        <label for="wk_mp_captcha"><span id="wk_mp_captchalable1"><?php echo rand(1, 20) ?></span> + <span id="wk_mp_captchalable2"><?php echo rand(1, 20) ?></span> =</label>
+                    </span>
+                    <input type="text" class="rquired-entry querysubject" name="wk_mp_captcha" id="wk_mp_captcha" />
+                <?php }
+                ?>
+                <div class="modal_footer">
+                    <span class="error"></span>
+                    <span class="errormail"></span>
+                    <input type="reset" value="<?php echo $helper->__('Reset') ?>" id="resetbtn"/>
+                    <input type="button" value="<?php echo $helper->__('Ask') ?>" id="askbtn" class="clickask"/>
+                    <span class="wk_clear"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var i = 0;
+    jQuery('#askbtn').click(function() {
+//        if (!validateEmail(jQuery('.queryemail').val())) {
+//            jQuery(this).addClass('error_border');
+//            jQuery('#ask_form .errormail').text("<?php //echo $helper->__(' Enter valid email Id ') ?>").slideDown('slow').delay(2000).slideUp('slow');
+//        } else {
+//            jQuery('#ask_form input,#ask_form textarea').each(function() {
+//                if (jQuery(this).val() == '') {
+//                    i++;
+//                    jQuery(this).addClass('error_border');
+//                }
+//            });
+//            if (i > 0) {
+//                jQuery('#ask_form .error').text("<?php //echo $helper->__(' Fill all the fields ') ?>").slideDown('slow').delay(2000).slideUp('slow');
+//            } else {
+                jQuery.ajax({
+                    url: '<?php echo Mage::getBaseUrl(); ?>marketplace/seller/sendmail',
+                    data: jQuery('#ask_form').serialize(),
+                    type: 'post',
+                    dataType: 'json',
+                    success: function(d) {
+                        alert("<?php echo $helper->__(' Mail Sent ') ?>..");
+                        jQuery('#resetbtn').trigger('click');
+                    }
+                });
+//            }
+//        }
+    });
+    function validateEmail($email) {
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        if (!emailReg.test($email)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+<?php // }  ?>

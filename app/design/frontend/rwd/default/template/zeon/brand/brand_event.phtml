@@ -1,0 +1,8 @@
+<?php $_brand = $this->getBrand(); ?>
+ 
+<?php $processor = Mage::helper('zeon_brand')->getBlockTemplateProcessor(); ?>
+
+<?php $_products = $this->getProductCollection(); ?>
+   <?php $_brand = $this->getBrand(); ?>
+                        <?php $processor = Mage::helper('zeon_brand')->getBlockTemplateProcessor(); ?>
+ <?php echo $processor->filter($_brand->getBrandEvent()); ?>

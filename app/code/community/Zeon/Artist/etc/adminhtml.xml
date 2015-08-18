@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <zextension translate="title">
+                        <title>Zeon Extensions</title>
+                        <sort_order>200</sort_order>
+                        <children>
+                            <zeon_artist translate="title" module="zeon_artist">
+                                <title>Artist</title>
+                                <sort_order>100</sort_order>
+                                <children>
+                                    <artist_list translate="title" module="zeon_artist">
+                                        <title>Manage Artist</title>
+                                        <sort_order>10</sort_order>
+                                    </artist_list>
+                                    <artist_settings>
+                                        <title>Manage Artist Settings</title>
+                                        <sort_order>20</sort_order>
+                                    </artist_settings>
+                                </children>
+                            </zeon_artist>
+                        </children>
+                    </zextension>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <zextension translate="title">
+                                        <title>Zeon Extensions</title>
+                                    </zextension>
+                                    <zeon_artist>
+                                        <title>Zeon Extensions - Artist Settings Section</title>
+                                    </zeon_artist>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <zextension translate="title">
+            <title>Zeon Extensions</title>
+            <sort_order>90</sort_order>
+            <children>
+                <zeon_artist translate="title" module="zeon_artist">
+                    <title>Artist</title>
+                    <sort_order>100</sort_order>                    
+                    <children>
+                        <artist_list translate="title" module="zeon_artist">
+                            <title>Manage Artist</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/artist_list</action>
+                            <depends>
+                                <module>Zeon_Artist</module>
+                                <config>zeon_artist/general/is_enabled</config>
+                            </depends>
+                        </artist_list>
+                        <artist_settings module="zeon_artist">
+                            <title>Manage Artist Settings</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/system_config/edit/section/zeon_artist</action>
+                        </artist_settings>
+                    </children>
+                </zeon_artist>
+            </children>
+        </zextension>
+    </menu>
+</config>

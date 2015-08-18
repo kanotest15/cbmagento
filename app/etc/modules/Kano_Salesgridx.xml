@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Kano_Salesgridx>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Kano_Salesgridx>
+  </modules>
+</config>

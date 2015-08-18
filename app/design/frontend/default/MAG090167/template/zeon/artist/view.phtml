@@ -1,0 +1,340 @@
+<?php $_artist = $this->getArtist(); ?>
+<?php $processor = Mage::helper('zeon_artist')->getBlockTemplateProcessor(); ?>
+<?php $_products = $this->getProductCollection(); ?>
+<div class="middle_main">
+    <div class="">  
+        <div class="">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">  
+                    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+                                <div class="picture_details_wrap new">
+                                    <?php echo $this->getLayout()->createBlock('zeon_artist/view')->setTemplate('zeon/artist/sliderartist.phtml')->toHtml(); ?></div>
+                            </div>
+
+                        </div>
+
+<!--                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-xs-12 col-sm-10">  
+                                <div class="col-lg-9 col-md-9 col-xs-12 col-sm-9">
+                                    <div class="row artist_expert_slider">
+											<div id="myCarousel" class="carousel slide" data-ride="carousel">
+											  <?php   
+													/* Akash Kumar Updated 29 April 2015 */
+													$artist_code=  $_artist->getArtist(); 
+													$artists = Mage::getResourceModel('zeon_artist/artist_collection')->addFieldToFilter('artist',$artist_code)->getFirstItem();
+												?>
+													<ol class="carousel-indicators">
+														<li class="" data-slide-to="0" data-target="#myCarousel"></li>
+														<li class="" data-slide-to="1" data-target="#myCarousel"></li>
+														<li class="" data-slide-to="2" data-target="#myCarousel"></li>
+														<li class="" data-slide-to="3" data-target="#myCarousel"></li>
+														<li class="" data-slide-to="4" data-target="#myCarousel"></li>
+														<li class="" data-slide-to="5" data-target="#myCarousel"></li>
+														<li class="" data-slide-to="6" data-target="#myCarousel"></li>
+													</ol>
+													<div class="carousel-inner" role="listbox">					
+														<div class="item active">						
+															<?php if($artists->getArtistImage() && $artists->getArtistImage() !=''){ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/'.$artists->getArtistImage(); ?>" alt="<?php echo $artists->getIdentifier(); ?>" />					
+															<?php }else{ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php } ?>
+														</div>	
+														<div class="item">	
+															<?php if($artists->getArtistImage1() && $artists->getArtistImage1() !=''){ ?>
+															<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php }else{ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php } ?>
+														</div>	
+														<div class="item">	
+															<?php if($artists->getArtistImage2() && $artists->getArtistImage2() !=''){ ?>
+															<img src="<?php echo Mage::getUrl('media').'artist/'.$artists->getArtistImage2(); ?>" alt="<?php echo $artists->getIdentifier(); ?>" />					
+															<?php }else{ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php } ?>
+														</div>	
+														<div class="item">		
+															<?php if($artists->getArtistImage3() && $artists->getArtistImage3() !=''){ ?>
+															<img src="<?php echo Mage::getUrl('media').'artist/'.$artists->getArtistImage3(); ?>" alt="<?php echo $artists->getIdentifier(); ?>" />				
+															<?php }else{ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php } ?>
+														</div>	
+														<div class="item">	
+															<?php if($artists->getArtistImage4() && $artists->getArtistImage4() !=''){ ?>
+															<img src="<?php echo Mage::getUrl('media').'artist/'.$artists->getArtistImage4(); ?>" alt="<?php echo $artists->getIdentifier(); ?>" />					
+															<?php }else{ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php } ?>
+														</div>	
+														<div class="item">	
+															<?php if($artists->getArtistImage5() && $artists->getArtistImage5() !=''){ ?>
+															<img src="<?php echo Mage::getUrl('media').'artist/'.$artists->getArtistImage5(); ?>" alt="<?php echo $artists->getIdentifier(); ?>" />					
+															<?php }else{ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php } ?>
+														</div>	
+														<div class="item">	
+															<?php if($artists->getArtistImage6() && $artists->getArtistImage6() !=''){ ?>
+															<img src="<?php echo Mage::getUrl('media').'artist/'.$artists->getArtistImage6(); ?>" alt="<?php echo $artists->getIdentifier(); ?>" />					
+															<?php }else{ ?>
+																<img src="<?php echo Mage::getUrl('media').'artist/aa1.png'; ?>" alt="<?php echo $artists->getIdentifier(); ?>" />
+															<?php } ?>
+														</div>
+													</div>
+
+													<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+													  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+													  <span class="sr-only">Previous</span>
+													</a>
+													<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+													  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+													  <span class="sr-only">Next</span>
+													</a>
+											</div>	
+									</div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-xs-12 col-sm-3">
+                                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('slider10')->toHtml() ?>
+								</div>
+                            </div>
+                        </div>-->
+
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+                            <div class="sure_product_heading">
+
+                            </div>
+                        </div>
+
+                        <?php $_artist = $this->getArtist(); ?>
+                        <?php $processor = Mage::helper('zeon_artist')->getBlockTemplateProcessor(); ?>
+
+                        <div class="category-view">
+                            <?php echo $this->getToolbarHtml() ?>
+                            <div class="category-products">
+                                <?php if (($_products = $this->getProductCollection()) && $_collectionSize = count($_products)): ?>
+
+                                    <?php $_columnCount = $this->getColumnCount(); ?>
+                                    <?php
+                                    $i = 0;
+                                    foreach ($_products as $product):
+                                        ?>
+                                        <?php $_product = Mage::getModel('catalog/product')->load($product['entity_id']); ?>
+                                            <?php if ($i++ % $_columnCount == 0): ?>
+                                            <ul class="products-grid first odd">
+											<?php endif ?>
+                                            <li class="col-lg-4 col-md-4 col-sm-6 col-xs-12<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
+                                                <div class="product_box">
+                                                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>">
+                                                        <div product_wrap" align="center">
+                                                             <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image') ?>" width="184" height="165" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" />
+                                                        </div>
+                                                    </a>
+
+                                                    <div class="product_detail_wrap">
+                                                        <div class="social_show">
+
+                                                            <div class="social_icon">
+                                                                <span class="icon-heart icon-md"></span>
+                                                            </div>
+
+                                                            <div class="social_icon">
+                                                                <span class="icon-facebook icon-md"></span>
+                                                            </div>
+                                                            <div class="social_icon">
+                                                                <span class="icon-twitter icon-md"></span>
+                                                            </div>
+                                                            <div class="social_icon">
+                                                                <span class="icon-pinterest icon-md"></span>
+                                                            </div>
+                                                            <div class="social_icon">
+                                                                <span class="icon-envelope icon-md"></span>
+                                                            </div>
+                                                        </div>
+                                                        <?php
+                                                        $productName = $_product->getName();
+                                                        if (strlen($productName) > 35) {
+                                                            $productName = substr($productName, 0, 32) . '...';
+                                                        }
+                                                        ?>
+                                                        <h1><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>"><?php echo $this->htmlEscape($productName) ?> </a></h1>
+                                                        <h2> By <?php echo Mage::getModel('zeon_artist/artist')->getArtistName($_artist->getArtist(), Mage::app()->getStore()->getId()) ?></h2>
+														<?php
+															$storeOnly = $_product->getStoreOnly();
+															$priceMessage = $_product->getPriceMessage();
+															if($storeOnly==1){
+														?>
+															<span class="price instoreonly">
+																<?php echo $this->__('In Store Only');?>
+															</span>
+															<?php if(isset($priceMessage) && strlen($priceMessage)>0){?>
+																<span class="regular-price" id="product-price-9207">
+																	<span class="price"><?php echo $priceMessage;?></span>
+																</span>
+															<?php }?>
+														<?php
+															}else{
+														?>
+                                                        <h2><span><?php echo $this->getPriceHtml($_product, true) ?></span></h2>
+														<?php }?>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        <?php if ($i % $_columnCount == 0 || $i == count($_products)): ?>
+                                            </ul>
+                                        <?php endif ?>
+                                    <?php endforeach ?>
+
+								<?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<?php //zend_debug::dump($_artist->getArtistBanner());exit; ?>
+                                <?php if ($_artist->getArtistBanner()): ?>
+                                    <a href="<?php echo $this->getUrl('artist' . '/' . $_artist->getIdentifier()) ?>">
+										<img alt="<?php echo $_artist->getArtistBanner() ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'artist' . '/' . $_artist->getArtistBanner() ?>" height="91" width="208">
+									</a>
+								<?php endif; ?>
+                            </div>
+							<?php if($_artist->getDisplayAuthorizedDealer()){ ?>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . '/artist/defentive.png'; ?>" alt="">
+							</div>
+							<?php } ?>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="shure_wrap">							
+                            <h1><?php echo $_artist->getIdentifier(); ?></h1>
+                            <p><?php echo $processor->filter($_artist->getDescription()); ?></p>
+
+                        </div>
+
+                        <div class="shure_text">
+                            <p>   
+								<?php echo $processor->filter($_artist->getDescription1()); ?>
+                            </p>
+                        </div>
+
+						<div class="clearfix"></div>
+						<!-- Akash Kumar Updated 27 MAy 2015 -->
+						<?php //echo $processor->filter($_artist->getDescription2()); ?> 
+						<div class="shure_wrap">
+							<h1 class="buzz">Artist Buzz:</h1>
+						</div>
+						<div class="buzz_field">
+							<div class="row">
+								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+									<div class="buz_box"><img src="<?php echo $this->getSkinUrl('images/buzz1.png') ?>" alt="" /></div>
+								</div>
+								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+									<div class="buz_right">
+										<p><?php echo $this->getLayout()->createBlock('zeon_artist/view')->setTemplate('zeon/artist/artist_event.phtml') ?></p>
+										<p><?php echo $this->getLayout()->createBlock("zeon_artist/view")->setTemplate("zeon/artist/artist_event.phtml")->toHtml(); ?></p>	
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<?php $artist_reviews= $this->getArtistReview($_artist->getArtist());?>
+						<?php if(!empty($artist_reviews)){ ?>
+						<div class="shure_wrap">
+							<h1 class="buzz"><?php echo $this->__('Artist Reviews:')?></h1>
+						</div>
+						<div class="buzz_field">
+							<div class="row">
+								<div class="jcarousel-wrapper">
+									<div class="jcarousel">
+										<ul>
+											<?php foreach($artist_reviews as $key=>$review) { 
+											$product = Mage::getModel('catalog/product')->load($review['product_id']);
+											$productMediaConfig = Mage::getModel('catalog/product_media_config');
+											$baseImageUrl = $productMediaConfig->getMediaUrl($product->getSmallImage());
+											?>	
+											<li>
+												<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+													<div class="buz_box">
+														<a href="<?php echo $product->getProductUrl();?>" title="<?php echo $product->getName();?>">
+															<img class="artistreview_img" src="<?php echo $baseImageUrl?>" alt="<?php echo $product->getName();?>" />
+														</a>
+													</div>
+												</div>
+												<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+													<div class="buz_right">
+														<div class="artist_reviews_content row">	
+															<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">															
+																<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 review_text1">
+																	<?php
+																	$reviewDetail = $review['detail'];
+																	$ratingPercent = $review['percent'];
+																	if(strlen($reviewDetail)>100){
+																		$reviewDetail = substr($reviewDetail,0,100).'..';
+																	}
+																	?>
+																	<p><?php echo $reviewDetail;?></p>
+																</div>
+																<?php if($ratingPercent>0){?>
+																<div class="rating-box col-md-3 col-sm-3 col-xs-3">
+																	<div class="rating" style="width:<?php echo $review['percent'] ?>%;"></div>
+																</div>
+																<?php }?>
+															</div>
+														</div>
+												    </div>
+												</div>
+											</li>
+											<?php } ?>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<?php echo $processor->filter($_artist->getArtistEvent()); ?>
+<style type="text/css">
+.artist_reviews{
+	display:inline-block;
+}
+.review_text1{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.rating-box {
+    background: rgba(0, 0, 0, 0) url(<?php echo $this->getSkinUrl('images').'/product_rating_blank_star.gif' ?>) repeat-x scroll 0 0;
+    float: left;
+    height: 16px;
+    margin-left: 10px;
+    position: relative;
+    width: 69px;
+}
+.rating-box .rating {
+    background: rgba(0, 0, 0, 0) url(<?php echo $this->getSkinUrl('images').'/product_rating_full_star.gif'?>) repeat-x scroll 0 0;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.artistreview_img{width:50px;}
+</style>
+<script type="text/javascript" src="<?php echo Mage::getUrl('skin').'js/jcarousel.responsive.js'; ?>"></script>
+<script type="text/javascript" src="<?php echo Mage::getUrl('skin').'js/jquery.jcarousel.min.js'; ?>"></script>

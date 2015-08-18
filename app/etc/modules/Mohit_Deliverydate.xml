@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Mohit_Deliverydate>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Shipping />
+                <Mage_Checkout />
+                <Mage_Sales />
+            </depends>
+        </Mohit_Deliverydate>
+    </modules>
+</config>

@@ -1,0 +1,37 @@
+<?php $_brand = $this->getBrands();?>
+<?php $processor = Mage::helper('zeon_brand')->getBlockTemplateProcessor(); ?>
+<?php $_brandsCollection = $this->getBrandsCollection(); ?>
+<?php $_columnCount = 8; ?>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+		<div class="picture_details_wrap new">			<div class="item"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('slider6')->toHtml() ?></div>
+		</div>
+    </div>
+    <?php $i = 0;
+    foreach ($_brandsCollection as $_brand):?>
+        <?php if ($i++ % $_columnCount == 0): ?>        <?php endif ?>
+    <div class="col-lg-2 new_productbox col-md-6 col-sm-6 col-xs-12">
+		<div class="product_box">
+			<div align="center" class="product_wrap fixed product_wrap_fixed12">
+				<?php if($_brand->getBrandLogo() != ''){ ?>
+				<a href="<?php echo $this->getUrl('brand' . '/' . $_brand->getIdentifier()) ?>" title="<?php echo $_brand->getBrand() ?>">				<img alt="<?php echo $_brand->getBrandLogo() ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'brand' . '/' . $_brand->getBrandLogo() ?>">				</a>
+                <?php } ?>
+				<div class="brand_hover brand_hover12">
+					<div class="brand_container">
+						<div class="brand_text"><?php echo $_brand->getIdentifier();?></div>
+						<div class="brand_pera"><p><?php echo substr($processor->filter($_brand->getDescription()),0,64); ?></p></div>
+						<div class="shop_now">
+							<a style="font-style:normal; font-size:18px;" href="<?php  echo $this->getUrl('brand' . '/' . $_brand->getIdentifier()) ?>">Shop Now</a>
+						</div>
+					</div>				</div>
+			</div>
+			<div class="product_detail_wrap">
+				<h1 class="padds"><a href="<?php echo $this->getUrl('brand' . '/' . $_brand->getIdentifier()) ?>" title="<?php echo $_brand->getBrand() ?>"><?php $des=20;				if(strlen(					$_brand->getBrand())>$des) { echo substr($_brand->getBrand(),0,15).'...';				}else{
+					echo $_brand->getBrand();
+				}?></a>
+				</h1>
+			</div>
+		</div>
+	</div>
+    <?php endforeach; ?>
+</div>

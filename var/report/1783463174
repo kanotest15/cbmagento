@@ -1,0 +1,9 @@
+a:5:{i:0;s:314:"Error in file: "C:\xampp\htdocs\cb_magento\app\code\community\Magebird\Popup\sql\magebird_popup_setup\mysql4-install-1.0.0.php" - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'magebird_popup_setup' for key 'PRIMARY', query was: INSERT INTO `core_resource` (`code`, `version`) VALUES (?, ?)";i:1;s:964:"#0 C:\xampp\htdocs\cb_magento\app\code\core\Mage\Core\Model\Resource\Setup.php(645): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 C:\xampp\htdocs\cb_magento\app\code\core\Mage\Core\Model\Resource\Setup.php(421): Mage_Core_Model_Resource_Setup->_modifyResourceDb('install', '', '1.4.4')
+#2 C:\xampp\htdocs\cb_magento\app\code\core\Mage\Core\Model\Resource\Setup.php(327): Mage_Core_Model_Resource_Setup->_installResourceDb('1.4.4')
+#3 C:\xampp\htdocs\cb_magento\app\code\core\Mage\Core\Model\Resource\Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 C:\xampp\htdocs\cb_magento\app\code\core\Mage\Core\Model\App.php(417): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 C:\xampp\htdocs\cb_magento\app\code\core\Mage\Core\Model\App.php(343): Mage_Core_Model_App->_initModules()
+#6 C:\xampp\htdocs\cb_magento\app\Mage.php(684): Mage_Core_Model_App->run(Array)
+#7 C:\xampp\htdocs\cb_magento\index.php(87): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:12:"/cb_magento/";s:11:"script_name";s:21:"/cb_magento/index.php";s:4:"skin";s:7:"default";}

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Mohit_Deliverydate>
+			<version>0.1.0</version>
+		</Mohit_Deliverydate>
+	</modules>
+	<global>
+		<helpers>
+			<deliverydate>
+				<class>Mohit_Deliverydate_Helper</class>
+			</deliverydate>
+		</helpers>
+		<models>
+			<deliverydate>
+				<class>Mohit_Deliverydate_Model</class>
+			</deliverydate>
+		</models>
+	</global>
+	<default>
+		<deliverydate>
+			<outofstock>
+				<days>10</days>
+			</outofstock>
+		</deliverydate>
+	</default>
+</config>

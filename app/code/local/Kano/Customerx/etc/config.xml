@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Kano_Customerx>
+      <version>0.1.0</version>
+    </Kano_Customerx>
+  </modules>
+  <frontend>
+    <routers>
+      <customerx>
+        <use>standard</use>
+          <args>
+            <module>Kano_Customerx</module>
+            <frontName>customerx</frontName>
+          </args>
+      </customerx>
+    </routers>
+  </frontend>
+  <global>
+		<rewrite>        
+            <kano_customerx_customer_accountcontroller>
+                <from><![CDATA[#^/customer/account/#]]></from> <!-- Mage_Customer_AccountController  -->
+                <to>/customerx/customer_account/</to> <!-- Kano_Customerx_Customer_AccountController  -->
+            </kano_customerx_customer_accountcontroller>
+		</rewrite>
+    <helpers>
+      <customerx>
+        <class>Kano_Customerx_Helper</class>
+      </customerx>
+    </helpers>
+  </global>
+  <admin>
+	<routers>
+	  <customerx>
+	    <use>admin</use>
+		<args>
+		  <module>Kano_Customerx</module>
+		  <frontName>admin_customerx</frontName>
+		</args>
+	  </customerx>
+	</routers>
+  </admin>
+</config> 

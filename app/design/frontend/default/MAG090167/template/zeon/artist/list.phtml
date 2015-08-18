@@ -1,0 +1,37 @@
+<?php $_artist = $this->getArtists();?>
+<?php $processor = Mage::helper('zeon_artist')->getBlockTemplateProcessor(); ?>
+<?php $_artistsCollection = $this->getArtistsCollection(); ?>
+<?php $_columnCount = 8; ?>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+		<div class="picture_details_wrap new">			<div class="item"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('slider6')->toHtml() ?></div>
+		</div>
+    </div>
+    <?php $i = 0;
+    foreach ($_artistsCollection as $_artist):?>
+        <?php if ($i++ % $_columnCount == 0): ?>        <?php endif ?>
+    <div class="col-lg-2 new_productbox col-md-6 col-sm-6 col-xs-12">
+		<div class="product_box">
+			<div align="center" class="product_wrap fixed product_wrap_fixed12">
+				<?php if($_artist->getArtistLogo() != ''){ ?>
+				<a href="<?php echo $this->getUrl('artist' . '/' . $_artist->getIdentifier()) ?>" title="<?php echo $_artist->getArtist() ?>">				<img alt="<?php echo $_artist->getArtistLogo() ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'artist' . '/' . $_artist->getArtistLogo() ?>">				</a>
+                <?php } ?>
+				<div class="artist_hover artist_hover12">
+					<div class="artist_container">
+						<div class="artist_text"><?php echo $_artist->getIdentifier();?></div>
+						<div class="artist_pera"><p><?php echo substr($processor->filter($_artist->getDescription()),0,64); ?></p></div>
+						<div class="shop_now">
+							<a style="font-style:normal; font-size:18px;" href="<?php  echo $this->getUrl('artist' . '/' . $_artist->getIdentifier()) ?>">Shop Now</a>
+						</div>
+					</div>				</div>
+			</div>
+			<div class="product_detail_wrap">
+				<h1 class="padds"><a href="<?php echo $this->getUrl('artist' . '/' . $_artist->getIdentifier()) ?>" title="<?php echo $_artist->getArtist() ?>"><?php $des=20;				if(strlen(					$_artist->getArtist())>$des) { echo substr($_artist->getArtist(),0,15).'...';				}else{
+					echo $_artist->getArtist();
+				}?></a>
+				</h1>
+			</div>
+		</div>
+	</div>
+    <?php endforeach; ?>
+</div>

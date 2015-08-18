@@ -1,0 +1,243 @@
+<?php
+$id = $this->getRequest()->getParam('id');
+$delivery_location = $this->getDeliveryLocation($id);
+$approve_vendor = $this->getApproveDetail($id);
+$vendorDetail = $this->getVendorDetail($id);
+$logo = $vendorDetail->getlogopic() == '' ? "noimage.png" : $vendorDetail->getlogopic();
+$logo = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'avatar/' . $logo;
+$customer = Mage::getModel('customer/customer')->load($id);
+$customerAddressId = $customer->getDefaultBilling();
+if ($customerAddressId) {
+    $address = Mage::getModel('customer/address')->load($customerAddressId);
+    $addressdata = $address->getData();
+    $contname = Mage::app()->getLocale()->getCountryTranslation($address->getCountryId());
+    $Address = $address->getStreet(1) . " " . $address->getStreet(2) . " " . $address->getCity() . " " . $address->getRegion() . " " . $contname;
+}
+?>
+<div>
+    <div class="upper-part-1">
+        <div class="part-1-block">
+            <span></span>
+            <span>
+                <img src="<?php echo $logo; ?>" title="logo" />
+                <span class="profile_name"><?php echo $customer->getName(); ?></span>
+            </span> 
+            <!--<span><button type="button">Send a Message</button></span>-->
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('former-profile')->toHtml(); ?>
+        </div>
+        <div class="part-2-map">
+            <div id="map" style="width: 100%; height: 400px; margin-top:15px;"></div>
+        </div>
+        <div class="part-2-map vendor_detail">
+            <ul>
+                <li>Vendor Name</li>
+                <li>Vendor Number</li>
+                <li>Expiration Date</li>
+            </ul>
+            <?php
+            if (count($approve_vendor['name']) > 0):
+                for ($j = 0; $j < count($approve_vendor['name']); $j++) {
+                    ?>
+                    <ul>
+                        <li><?php echo $approve_vendor['name'][$j]; ?></li>
+                        <li><?php echo $approve_vendor['vendor_number'][$j]; ?></li>
+                        <li><?php echo $approve_vendor['expire_date'][$j]; ?></li>
+                    </ul>
+                    <?php
+                }
+            endif;
+            ?>
+
+        </div>
+    </div>
+    <div class="upper-part-2">
+        <span>Location</span>
+        <p><?php echo $Address; ?></p>
+        <span>Hours</span>
+        <p><?php echo ($vendorDetail->getHours() != '') ? $vendorDetail->getHours() : 'Not Available'; ?></p>
+        <?php if ($vendorDetail->getProfileurl() != '') { ?>
+            <span>Website</span>
+            <p><a href="<?php echo $vendorDetail->getProfileurl(); ?>" ><?php echo $vendorDetail->getProfileurl(); ?></a></p>
+        <?php } ?>
+        <?php if (trim($vendorDetail->getCompdesi()) != '') { ?>
+            <span>Description</span>
+            <p><?php echo $vendorDetail->getCompdesi(); ?></p>
+        <?php } ?>
+    </div>
+    <div class="upper-part-3">
+        <span>Delivery Schedule</span>
+        <div>
+            <?php if (count($delivery_location['day']) > 0) { ?>
+                <div>
+                    <div class="for_days">
+                        <h3>Days</h3>
+                        <span><p>Monday</p></span>
+                        <span><p>Tuesday</p></span>
+                        <span><p>Wednesday</p></span>
+                        <span><p>Thursday</p></span>
+                        <span><p>Friday</p></span>
+                        <span><p>Saturday</p></span>
+                        <span><p>Sunday</p></span>
+                    </div>
+                    <div class="for_place">
+                        <h3>Place</h3>
+                        <span><p><?php echo ($delivery_location['place'][0]) ? $delivery_location['place'][0] : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['place'][1]) ? $delivery_location['place'][1] : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['place'][2]) ? $delivery_location['place'][2] : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['place'][3]) ? $delivery_location['place'][3] : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['place'][4]) ? $delivery_location['place'][4] : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['place'][5]) ? $delivery_location['place'][5] : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['place'][6]) ? $delivery_location['place'][6] : 'Not available'; ?></p></span>
+                    </div>
+                    <div class="for_time">
+                        <h3>Time</h3>
+                        <span><p><?php echo ($delivery_location['from_time'][0]) ? (($delivery_location['from_time'][0] > 12) ? ($delivery_location['from_time'][0] - 12) . ':00 PM' : $delivery_location['from_time'][0] . ':00 AM') . ' to ' . (($delivery_location['to_time'][0] > 12) ? $delivery_location['to_time'][0] - 12 . ':00 PM' : $delivery_location['to_time'][0] . ':00 AM') : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['from_time'][1]) ? (($delivery_location['from_time'][1] > 12) ? ($delivery_location['from_time'][1] - 12) . ':00 PM' : $delivery_location['from_time'][1] . ':00 AM') . ' to ' . (($delivery_location['to_time'][1] > 12) ? $delivery_location['to_time'][1] - 12 . ':00 PM' : $delivery_location['to_time'][1] . ':00 AM') : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['from_time'][2]) ? (($delivery_location['from_time'][2] > 12) ? ($delivery_location['from_time'][2] - 12) . ':00 PM' : $delivery_location['from_time'][2] . ':00 AM') . ' to ' . (($delivery_location['to_time'][2] > 12) ? $delivery_location['to_time'][2] - 12 . ':00 PM' : $delivery_location['to_time'][2] . ':00 AM') : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['from_time'][3]) ? (($delivery_location['from_time'][3] > 12) ? ($delivery_location['from_time'][3] - 12) . ':00 PM' : $delivery_location['from_time'][3] . ':00 AM') . ' to ' . (($delivery_location['to_time'][3] > 12) ? $delivery_location['to_time'][3] - 12 . ':00 PM' : $delivery_location['to_time'][3] . ':00 AM') : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['from_time'][4]) ? (($delivery_location['from_time'][4] > 12) ? ($delivery_location['from_time'][4] - 12) . ':00 PM' : $delivery_location['from_time'][4] . ':00 AM') . ' to ' . (($delivery_location['to_time'][4] > 12) ? $delivery_location['to_time'][4] - 12 . ':00 PM' : $delivery_location['to_time'][4] . ':00 AM') : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['from_time'][5]) ? (($delivery_location['from_time'][5] > 12) ? ($delivery_location['from_time'][5] - 12) . ':00 PM' : $delivery_location['from_time'][5] . ':00 AM') . ' to ' . (($delivery_location['to_time'][5] > 12) ? $delivery_location['to_time'][5] - 12 . ':00 PM' : $delivery_location['to_time'][5] . ':00 AM') : 'Not available'; ?></p></span>
+                        <span><p><?php echo ($delivery_location['from_time'][6]) ? (($delivery_location['from_time'][6] > 12) ? ($delivery_location['from_time'][6] - 12) . ':00 PM' : $delivery_location['from_time'][6] . ':00 AM') . ' to ' . (($delivery_location['to_time'][6] > 12) ? $delivery_location['to_time'][6] - 12 . ':00 PM' : $delivery_location['to_time'][0] . ':00 AM') : 'Not available'; ?></p></span>
+                    </div>
+                </div>
+                <?php
+                /* <span>
+                  <h3>Days</h3>
+                  <h3>Place</h3>
+                  </span>
+                  <?php // for ($i = 0; $i < count($delivery_location['day']); $i++) { ?>
+                  <span>
+                  <p>Monday</p>
+                  <p><?php echo ($delivery_location['place'][0])?$delivery_location['place'][0]:'Not available'; ?></p>
+                  </span>
+                  <span>
+                  <p>Tuesday</p>
+                  <p><?php echo ($delivery_location['place'][1])?$delivery_location['place'][1]:'Not available'; ?></p>
+                  </span>
+                  <span>
+                  <p>Wednesday</p>
+                  <p><?php echo ($delivery_location['place'][2])?$delivery_location['place'][2]:''; ?></p>
+                  </span>
+                  <span>
+                  <p>Thursday</p>
+                  <p><?php echo ($delivery_location['place'][3])?$delivery_location['place'][3]:''; ?></p>
+                  </span>
+                  <span>
+                  <p>Friday</p>
+                  <p><?php echo $delivery_location['place'][4]; ?></p>
+                  </span>
+                  <span>
+                  <p>Saturday</p>
+                  <p><?php echo $delivery_location['place'][5]; ?></p>
+                  </span>
+                  <span>
+                  <p>Sunday</p>
+                  <p><?php echo $delivery_location['place'][6]; ?></p>
+                  </span>
+                  <?php
+                  //                } */
+            } else {
+                echo '<span class="no_schedule">No Delivery schedule</span>';
+            }
+            ?>
+        </div>
+
+    </div>
+    <div class="list_seller_product">
+        <div class="page-title">
+            <h1><?php echo Mage::helper('marketplace')->__('Latest Product Added'); ?></h1>
+        </div>
+        <div>
+
+            <?php
+            $partnerId = $id;
+            $partnerproducts = Mage::getModel('marketplace/product')
+                    ->getCollection()
+                    ->addFieldToFilter('status', array('neq' => 2))
+                    ->addFieldToFilter('userid', $id)
+                    ->setOrder('mageproductid', 'DESC')
+                    ->setPageSize(8)
+                    ->setCurPage(1);
+            $x = 0;
+            foreach ($partnerproducts as $product) {
+                if ($x % 4 == 0):
+                    ?>
+                </ul><ul >
+                <?php
+            endif;
+            $product = Mage::getModel('catalog/product')->load($product->getMageproductid());
+            ?>
+            <li>
+                <a href="<?php echo $product->getProductUrl(); ?>">
+                    <img src="<?php
+                    echo Mage::helper('catalog/image')->init($product, 'small_image')->constrainOnly(false)
+                            ->keepAspectRatio(true)
+                            ->keepFrame(FALSE)
+                            ->keepTransparency(true)
+                            ->resize(135, 135);
+                    //product->getImageUrl();  
+                    ?>" title="<?php echo $product->getName(); ?>" alt="<?php echo $product->getName(); ?>" />
+                    <div class="mp_landing_hover">
+                        <span class="pro_name"><?php echo $product->getName(); ?></span>
+                        <span class="pro_code"><?php echo 'Plu Code - ' . $product->getSku(); ?></span>
+                    </div>
+                </a>
+                <a href="<?php echo $product->getProductUrl(); ?>" class="farmer-view-more-button">View More</a>
+            </li>
+            <?php
+            $x++;
+            if ($x % 4 == 0):
+                ?>  </ul> <?php endif; ?>
+    <?php } ?>
+</div>
+</div>
+</div>
+</div>
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript">
+    var locations = [
+<?php
+$request_url = "http://maps.googleapis.com/maps/api/geocode/xml?address=" . $Address . "&sensor=true";
+$xml = simplexml_load_file($request_url) or die("url not loading");
+$status = $xml->status;
+
+$Lat = $xml->result->geometry->location->lat;
+$Lon = $xml->result->geometry->location->lng;
+//$contname = Mage::getModel('directory/country')->loadByCode($address->getCountryId());
+//print_r($addressdata);
+//exit();
+?>
+        ['<?php echo $Address; ?>', <?php echo $Lat; ?>, <?php echo $Lon; ?>, 1]
+
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+//        center: new google.maps.LatLng(<?php //echo $store->getLat()                                                ?>, <?php //echo $store->getLong()                                                ?>),
+        center: new google.maps.LatLng(<?php echo $Lat; ?>, <?php echo $Lon; ?>),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+            };
+        })(marker, i));
+    }
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.fancybox.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/jquery.fancybox.css'); ?>" media="screen" />
+<script type="text/javascript">
+    jQuery(".fancybox").fancybox();
+</script>

@@ -1,0 +1,8 @@
+<?php $_artist = $this->getArtist(); ?>
+ 
+<?php $processor = Mage::helper('zeon_artist')->getBlockTemplateProcessor(); ?>
+
+<?php $_products = $this->getProductCollection(); ?>
+   <?php $_artist = $this->getArtist(); ?>
+                        <?php $processor = Mage::helper('zeon_artist')->getBlockTemplateProcessor(); ?>
+ <?php echo $processor->filter($_artist->getArtistEvent()); ?>

@@ -1,0 +1,118 @@
+<?php
+$id = $this->getRequest()->getParam('id');
+$logo = "noimage.png";
+$logo = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'avatar/noimage.png';
+$customer = Mage::getModel('customer/customer')->load($id);
+$customerAddressId = $customer->getDefaultBilling();
+if ($customerAddressId) {
+    $address = Mage::getModel('customer/address')->load($customerAddressId);
+    $addressdata = $address->getData();
+    $contname = Mage::app()->getLocale()->getCountryTranslation($address->getCountryId());
+    $Address = $address->getStreet(1) . " " . $address->getStreet(2) . " " . $address->getCity() . " " . $address->getRegion() . " " . $contname;
+}
+?>
+<div>
+    <div class="upper-part-1">
+        <div class="part-1-block">
+            <span>
+                <img class="profile_logo" src="<?php echo $logo; ?>" title="logo" />
+            </span> 
+        </div>
+        <div class="part-2-address">
+            <div class="profile_address"><?php echo $Address; ?></div>
+        </div>
+    </div>
+    <div class="list_seller_product">
+        <div class="page-title">
+            <h1><?php echo Mage::helper('marketplace')->__('Recently Purchased Products'); ?></h1>
+        </div>
+        <div>
+
+            <?php
+            $partnerId = $id;
+            $partnerproducts = $this->getCustomerProductCollection($id);
+            $x = 0;
+            for ($i = 0; $i < count($partnerproducts['id']); $i++) {
+                if ($x % 4 == 0):
+                    ?>
+                </ul><ul >
+                <?php
+            endif;
+            $product = Mage::getModel('catalog/product')->load($partnerproducts['id'][$i]);
+            ?>
+            <li>
+                <a href="<?php echo $product->getProductUrl(); ?>">
+                    <img src="<?php
+                    echo Mage::helper('catalog/image')->init($product, 'small_image')->constrainOnly(false)
+                            ->keepAspectRatio(true)
+                            ->keepFrame(FALSE)
+                            ->keepTransparency(true)
+                            ->resize(135, 135);
+                    //product->getImageUrl();  
+                    ?>" title="<?php echo $product->getName(); ?>" alt="<?php echo $product->getName(); ?>" />
+                    <div class="mp_landing_hover">
+                        <span class="pro_name"><?php echo $product->getName(); ?></span>
+                        <span class="pro_code"><?php echo 'Plu Code - ' . $product->getSku(); ?></span>
+                    </div>
+                </a>
+                <a href="<?php echo $product->getProductUrl(); ?>" class="farmer-view-more-button">View More</a>
+            </li>
+            <?php
+            $x++;
+            if ($x % 4 == 0):
+                ?>  </ul> <?php endif; ?>
+    <?php } ?>
+</div>
+</div> 
+</div>
+</div>
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript">
+    var locations = [
+<?php
+$request_url = "http://maps.googleapis.com/maps/api/geocode/xml?address=" . $Address . "&sensor=true";
+$xml = simplexml_load_file($request_url) or die("url not loading");
+$status = $xml->status;
+
+$Lat = $xml->result->geometry->location->lat;
+$Lon = $xml->result->geometry->location->lng;
+//$contname = Mage::getModel('directory/country')->loadByCode($address->getCountryId());
+//print_r($addressdata);
+//exit();
+?>
+        ['<?php echo $Address; ?>', <?php echo $Lat; ?>, <?php echo $Lon; ?>, 1]
+
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+//        center: new google.maps.LatLng(<?php //echo $store->getLat()                                                ?>, <?php //echo $store->getLong()                                                ?>),
+        center: new google.maps.LatLng(<?php echo $Lat; ?>, <?php echo $Lon; ?>),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+            };
+        })(marker, i));
+    }
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.fancybox.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/jquery.fancybox.css'); ?>" media="screen" />
+<script type="text/javascript">
+    jQuery(".fancybox").fancybox(
+
+            );
+</script>

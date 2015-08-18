@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Kano_Salesgridorder>
+      <version>0.1.0</version>
+    </Kano_Salesgridorder>
+  </modules>
+  <global>
+    <helpers>
+      <salesgridorder>
+        <class>Kano_Salesgridorder_Helper</class>
+      </salesgridorder>
+    </helpers>
+	<blocks>
+	  <salesgridorder>
+		<class>Kano_Salesgridorder_Block</class>
+	  </salesgridorder>
+			<adminhtml>
+				<rewrite>
+					<sales_order_grid>Kano_Salesgridorder_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+				</rewrite>
+			</adminhtml>
+	</blocks>
+	<models>
+	  <salesgridorder>
+		<class>Kano_Salesgridorder_Model</class>
+		<resourceModel>salesgridorder_mysql4</resourceModel>
+	  </salesgridorder>
+			<sales>
+				<rewrite>
+					<mysql4_order_collection>Kano_Salesgridorder_Model_Sales_Mysql4_Order_Collection</mysql4_order_collection>
+				</rewrite>
+			</sales>
+	</models>
+  </global>
+</config> 

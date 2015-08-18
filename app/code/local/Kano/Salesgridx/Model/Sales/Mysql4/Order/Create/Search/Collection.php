@@ -1,0 +1,5 @@
+<?php
+class Kano_Salesgridx_Model_Sales_Mysql4_Order_Sreate_Search_Collection extends Mage_Sales_Model_Resource_Order_Collection
+{
+}
+		

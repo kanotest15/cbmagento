@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Kano_Salesgridx>
+      <version>0.1.0</version>
+    </Kano_Salesgridx>
+  </modules>
+  <global>
+   <helpers>
+      <salesgridx>
+        <class>Kano_Salesgridx_Helper</class>
+      </salesgridx>
+    </helpers>
+	<blocks>
+	  <salesgridx>
+		<class>Kano_Salesgridx_Block</class>
+	  </salesgridx>
+			<adminhtml>
+				<rewrite>Mage_Adminhtml_Block_sales_order_grid
+					<sales_order_grid>Kano_Salesgridx_Block_Adminhtml_Sales_Order_Create_Search_Grid</sales_order_grid>
+				</rewrite>
+			</adminhtml>
+	</blocks>
+	<models>
+	  <salesgridx>
+		<class>Kano_Salesgridx_Model</class>
+		<resourceModel>salesgridx_mysql4</resourceModel>
+	  </salesgridx>
+			<sales>
+				<rewrite>
+					<mysql4_order_collection>Kano_Salesgridx_Model_Sales_Mysql4_Order_Create_Search_Collection</mysql4_order_collection>
+				</rewrite>
+			</sales>
+	</models>
+  </global>
+</config> 

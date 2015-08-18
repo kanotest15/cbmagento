@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Kano_List>
+      <version>0.1.0</version>
+    </Kano_List>
+  </modules>
+  <global>
+    <helpers>
+      <list>
+        <class>Kano_List_Helper</class>
+      </list>
+    </helpers>
+	<blocks>
+	  <list>
+		<class>Kano_List_Block</class>
+	  </list>
+			<catalog>
+				<rewrite>
+					<product_list>Kano_List_Block_Catalog_Product_List</product_list>
+				</rewrite>
+			</catalog>
+	</blocks>
+  </global>
+</config> 

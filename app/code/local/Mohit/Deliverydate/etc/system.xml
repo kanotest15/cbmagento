@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <deliverydate_tab module="deliverydate" translate="label">
+            <label>Mohit Modules</label>
+            <sort_order>100</sort_order>
+        </deliverydate_tab>
+    </tabs>
+    <sections>
+        <deliverydate>
+			<label>Out of Stock Setting</label>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<tab>deliverydate_tab</tab>
+            <groups>
+                <outofstock translate="label" module="deliverydate">
+                    <label>Ship Item after how many days</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <days translate="label">
+                            <label>Ship Item after how many days</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </days>
+                    </fields>
+                </outofstock>
+            </groups>
+        </deliverydate>
+    </sections>
+</config>
